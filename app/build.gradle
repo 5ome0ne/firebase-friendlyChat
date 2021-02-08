@@ -43,10 +43,13 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.12.0'
 
     // Firebase BoM
-    implementation platform('com.google.firebase:firebase-bom:26.3.0')
+    implementation platform('com.google.firebase:firebase-bom:26.4.0')
 
     // Dependency for the Firebase SDK for Google Analytics
     implementation 'com.google.firebase:firebase-analytics'
+
+    // Dependency for the Firebase Authentication library
+    implementation 'com.google.firebase:firebase-auth'
 
     // Dependency for the Firebase SDK for Realtime Database
     implementation 'com.google.firebase:firebase-database:19.6.0'
