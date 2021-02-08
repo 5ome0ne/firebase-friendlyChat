@@ -40,15 +40,17 @@ dependencies {
     implementation 'com.android.support:appcompat-v7:30.0.0'
 
     // Displaying images
-    implementation 'com.github.bumptech.glide:glide:3.7.0'
+    implementation 'com.github.bumptech.glide:glide:4.12.0'
 
     // Firebase BoM
     implementation platform('com.google.firebase:firebase-bom:26.3.0')
 
     // Dependency for the Firebase SDK for Google Analytics
-    // When using the BoM, don't specify versions in Firebase dependencies
     implementation 'com.google.firebase:firebase-analytics'
 
-}
+    // Dependency for the Firebase SDK for Realtime Database
+    implementation 'com.google.firebase:firebase-database:19.6.0'
 
-apply plugin: 'com.google.gms.google-services'  // Google Services plugin
+    // FirebaseUI for Firebase Auth
+    implementation 'com.firebaseui:firebase-ui-auth:7.1.1'
+}
