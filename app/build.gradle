@@ -45,15 +45,15 @@ dependencies {
     // Firebase BoM
     implementation platform('com.google.firebase:firebase-bom:26.4.0')
 
+    // Firebase
     // Dependency for the Firebase SDK for Google Analytics
     implementation 'com.google.firebase:firebase-analytics'
-
     // Dependency for the Firebase Authentication library
     implementation 'com.google.firebase:firebase-auth'
-
     // Dependency for the Firebase SDK for Realtime Database
     implementation 'com.google.firebase:firebase-database:19.6.0'
-
     // FirebaseUI for Firebase Auth
     implementation 'com.firebaseui:firebase-ui-auth:7.1.1'
+    // Cloud Storage for Firebase
+    implementation 'com.google.firebase:firebase-storage:19.2.1'
 }
