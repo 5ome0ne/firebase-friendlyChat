@@ -42,18 +42,21 @@ dependencies {
     // Displaying images
     implementation 'com.github.bumptech.glide:glide:4.12.0'
 
+    // Firebase
     // Firebase BoM
     implementation platform('com.google.firebase:firebase-bom:26.4.0')
-
-    // Firebase
-    // Dependency for the Firebase SDK for Google Analytics
-    implementation 'com.google.firebase:firebase-analytics'
-    // Dependency for the Firebase Authentication library
+    // Authentication library
     implementation 'com.google.firebase:firebase-auth'
-    // Dependency for the Firebase SDK for Realtime Database
-    implementation 'com.google.firebase:firebase-database:19.6.0'
     // FirebaseUI for Firebase Auth
     implementation 'com.firebaseui:firebase-ui-auth:7.1.1'
+    // Cloud Messaging
+    implementation 'com.google.firebase:firebase-messaging'
+    // Dependency for the Firebase SDK for Google Analytics
+    implementation 'com.google.firebase:firebase-analytics'
+    // Dependency for the Firebase SDK for Realtime Database
+    implementation 'com.google.firebase:firebase-database'
     // Cloud Storage for Firebase
-    implementation 'com.google.firebase:firebase-storage:19.2.1'
+    implementation 'com.google.firebase:firebase-storage'
+    // Dependencies for the Remote Config and Analytics libraries
+    implementation 'com.google.firebase:firebase-config'
 }
