@@ -253,8 +253,7 @@ public class MainActivity extends AppCompatActivity {
                 uploadTask.addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        // Handle failures
-                        // ...
+                        Log.e(TAG, "Upload failed");
                     }
                 });
 
@@ -277,14 +276,12 @@ public class MainActivity extends AppCompatActivity {
                                     new FriendlyMessage(null, mUsername, downloadUri.toString());
                             mMessagesDatabaseReference.push().setValue(friendlyMessage);
                         } else {
-                            // Handle failures
-                            // ...
+                            Log.e(TAG, "Photo upload failed");
                         }
                     }
                 });
             } else if (resultCode == RESULT_CANCELED){
                 // Handle CANCELED
-                // ...
             }
         }
     }
