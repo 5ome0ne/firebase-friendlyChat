@@ -6,3 +6,4 @@ build
 app/google-services.json
 .DS_Store
 app/google-services.json
+/FriendlyChatFunctions
