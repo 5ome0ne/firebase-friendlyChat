@@ -54,22 +54,33 @@ import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.google.firebase.udacity.friendlychat.pojo.FriendlyMessage;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * MainActivity activity of firebase chat.
+ */
 public class MainActivity extends AppCompatActivity {
-
+    /**
+     * Tag for Log-s.
+     */
     private static final String TAG = "MainActivity";
-
+    /**
+     * Nickname anonymous users.
+     */
     public static final String ANONYMOUS = "anonymous";
     public static final int DEFAULT_MSG_LENGTH_LIMIT = 1000;
+    /**
+     * IDs to interact with the application.
+     */
     private static final int RC_SIGN_IN = 1;
     private static final int RC_PHOTO_PICKER = 2;
+
     private static final String FRIENDLY_MSG_LENGTH_KEY = "friendly_msg_lenght";
 
     private ListView mMessageListView;
@@ -171,7 +182,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser currentFirebaseUser = mFirebaseAuth.getCurrentUser();
-                if (currentFirebaseUser !=null){
+                if (currentFirebaseUser != null) {
                     onSignedInInitialize(currentFirebaseUser.getDisplayName());
                 } else {
                     onSignedOutCleanup();
@@ -206,7 +217,7 @@ public class MainActivity extends AppCompatActivity {
                 .addOnCompleteListener(this, new OnCompleteListener<Boolean>() {
                     @Override
                     public void onComplete(@NonNull Task<Boolean> task) {
-                        if (task.isSuccessful()){
+                        if (task.isSuccessful()) {
                             boolean updated = task.getResult();
                             long l = mFirebaseRemoteConfig.getLong(FRIENDLY_MSG_LENGTH_KEY);
                             Log.d(TAG, "Config params updated: " + updated);
@@ -235,15 +246,15 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == RC_SIGN_IN){
-            if (resultCode == RESULT_OK){
+        if (requestCode == RC_SIGN_IN) {
+            if (resultCode == RESULT_OK) {
                 Toast.makeText(this, "Signed in!", Toast.LENGTH_SHORT).show();
-            } else if (resultCode == RESULT_CANCELED){
+            } else if (resultCode == RESULT_CANCELED) {
                 Toast.makeText(this, "Sign in canceled", Toast.LENGTH_SHORT).show();
                 finish();
             }
-        } else if (requestCode == RC_PHOTO_PICKER){
-            if (resultCode == RESULT_OK){
+        } else if (requestCode == RC_PHOTO_PICKER) {
+            if (resultCode == RESULT_OK) {
                 Uri selectedImageUri = data.getData();
                 final StorageReference photoStorageReference =
                         mChatPhotosStorageReference.child(selectedImageUri.getLastPathSegment());
@@ -280,7 +291,7 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }
                 });
-            } else if (resultCode == RESULT_CANCELED){
+            } else if (resultCode == RESULT_CANCELED) {
                 // Handle CANCELED
             }
         }
@@ -297,21 +308,29 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void attachDatabaseReadListener() {
-        if (mChildEventListener == null){
+        if (mChildEventListener == null) {
             mChildEventListener = new ChildEventListener() {
                 @Override
                 public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                     FriendlyMessage friendlyMessage = snapshot.getValue(FriendlyMessage.class);
                     mMessageAdapter.add(friendlyMessage);
                 }
+
                 @Override
-                public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) { }
+                public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                }
+
                 @Override
-                public void onChildRemoved(@NonNull DataSnapshot snapshot) { }
+                public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+                }
+
                 @Override
-                public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) { }
+                public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                }
+
                 @Override
-                public void onCancelled(@NonNull DatabaseError error) { }
+                public void onCancelled(@NonNull DatabaseError error) {
+                }
             };
 
             mMessagesDatabaseReference.addChildEventListener(mChildEventListener);
@@ -319,7 +338,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void detachDatabaseReadListener() {
-        if (mChildEventListener != null){
+        if (mChildEventListener != null) {
             mMessagesDatabaseReference.removeEventListener(mChildEventListener);
             mChildEventListener = null;
         }
@@ -334,7 +353,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        if (mAuthStateListener != null){
+        if (mAuthStateListener != null) {
             mFirebaseAuth.removeAuthStateListener(mAuthStateListener);
         }
         detachDatabaseReadListener();
@@ -350,7 +369,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.sign_out_menu:
                 AuthUI.getInstance().signOut(this);
                 return true;
